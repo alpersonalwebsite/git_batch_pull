@@ -1,0 +1,118 @@
+# ==========================================
+# SECURITY - Sensitive Files
+# ==========================================
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Credentials and tokens
+*token*
+*secret*
+*password*
+*key*
+!requirements*.txt
+!pyproject.toml
+!*.md
+!**/test_*
+!**/*token_manager.py  # Allow our token manager code
+
+# Personal configuration
+config.local.*
+*.local
+
+# ==========================================
+# PYTHON BUILD & CACHE
+# ==========================================
+# Virtualenv
+.venv/
+venv/
+env/
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Poetry (lock file should be included for reproducible builds)
+# poetry.lock  # Commented out - lock file should be committed
+
+# Jupyter Notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# ==========================================
+# TESTING & COVERAGE
+# ==========================================
+# Test/coverage/lint caches
+.pytest_cache/
+.hypothesis/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# ==========================================
+# SECURITY & ANALYSIS
+# ==========================================
+# Detect secrets
+.secrets.baseline
+.secrets.local
+
+# Security reports
+bandit_report.json
+bandit-report.json
+safety-report.json
+safety_report.json
+
+# ==========================================
+# BUILD & DEVELOPMENT
+# ==========================================
+# Logs
+*.log
+logs/
+
+# MkDocs build output
+site/
+
+
+# Development workflow files
+changelog_suggestions.md
+docs/CHANGELOG_WORKFLOW.md
+
+# ==========================================
+# EDITOR & OS
+# ==========================================
+# VSCode and editor files
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+
+# ==========================================
+# PROJECT SPECIFIC
+# ==========================================
+# Performance results (may contain sensitive paths)
+benchmarks/results/
+performance_results.json
+
+# Local development artifacts
+tmp/
+temp/
+test_repos/
+local_repos/

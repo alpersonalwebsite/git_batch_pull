@@ -1,0 +1,30 @@
+site_name: git-batch-pull
+repo_url: https://github.com/alpersonalwebsite/git_batch_pull
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - toc.integrate
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - API Reference:
+      - git_batch_pull: reference/git_batch_pull.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+            docstring_style: google
+            merge_init_into_class: true
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true

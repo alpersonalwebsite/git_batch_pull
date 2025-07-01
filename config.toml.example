@@ -1,0 +1,19 @@
+# Example config.toml
+# Place in the project root or specify with --config
+
+[general]
+log_level = "INFO"         # Log level: DEBUG, INFO, WARNING, ERROR
+log_file = "gitpull.log"   # Log file path (optional)
+quiet = false              # Suppress non-error output
+max_workers = 1            # Parallel git operations (use with caution)
+
+[github]
+use_ssh = false            # Use SSH URLs for cloning
+refetch_repos = false      # Refetch repo list from GitHub
+entity_type = "org"        # 'org' or 'user'
+entity_name = "my-org"     # Organization or user name
+repos = ["repo1", "repo2"] # List of repo names to process (optional)
+
+[plugins]
+# Example: plugin-specific config
+# my_plugin_option = true

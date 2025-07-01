@@ -1,0 +1,196 @@
+[tool.poetry]
+name = "git-batch-pull"
+version = "2.0.0"
+description = "Clone and pull one, several, or all GitHub repos for a user/org, securely and robustly."
+authors = ["Al Diaz <aldiazcode@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/alpersonalwebsite/git_batch_pull"
+repository = "https://github.com/alpersonalwebsite/git_batch_pull"
+documentation = "https://github.com/alpersonalwebsite/git_batch_pull/blob/main/docs/"
+keywords = ["git", "github", "batch", "clone", "pull", "automation", "devops", "cli", "repository", "sync"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Version Control",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: System :: Archiving :: Backup",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+packages = [{ include = "git_batch_pull", from = "src" }]
+include = [
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "config.toml.example",
+    "examples/*.py",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9.2,<4.0"
+requests = "*"
+python-dotenv = "*"
+colorama = "*"
+tqdm = "*"
+tomli = "*"
+importlib-metadata = "*"
+argcomplete = "*"
+keyring = "*"
+docutils = "^0.20"
+typer = "^0.15.0"
+# Core dependencies for secure git operations
+cryptography = ">=44.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+hypothesis = "*"
+ruff = "*"
+bandit = "*"
+safety = "*"
+build = "*"
+twine = "*"
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.6.14"
+mkdocstrings = {extras = ["python"], version = "^0.29.1"}
+pre-commit = "^4.2.0"
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+git-batch-pull = "git_batch_pull.cli:app"
+
+# Plugin entry points for extensibility
+[tool.poetry.plugins."git_batch_pull.plugins"]
+example = "git_batch_pull.plugins.example:ExamplePlugin"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/alpersonalwebsite/git_batch_pull/issues"
+"Changelog" = "https://github.com/alpersonalwebsite/git_batch_pull/blob/main/CHANGELOG.md"
+"Documentation" = "https://github.com/alpersonalwebsite/git_batch_pull/blob/main/docs/"
+"Security" = "https://github.com/alpersonalwebsite/git_batch_pull/blob/main/SECURITY.md"
+"Contributing" = "https://github.com/alpersonalwebsite/git_batch_pull/blob/main/CONTRIBUTING.md"
+"Sponsor" = "https://github.com/sponsors/alpersonalwebsite"
+
+# Additional tool configurations
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--cov-fail-under=50",
+]
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/conftest.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+show_missing = true
+precision = 2
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs", "examples", "benchmarks"]
+skips = ["B101", "B601"]  # Skip assert_used and shell_injection_os_system
+
+[tool.bandit.assert_used]
+skips = ["*_test.py", "*/test_*.py"]

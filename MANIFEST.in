@@ -1,0 +1,56 @@
+# Include essential files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include SECURITY.md
+include CONTRIBUTING.md
+include MIGRATION.md
+include pyproject.toml
+include poetry.lock
+
+# Include configuration examples
+include config.toml.example
+include .env.example
+
+# Include documentation
+recursive-include docs *.md *.yml *.yaml
+include mkdocs.yml
+
+# Include examples
+recursive-include examples *.py *.md *.toml
+
+# Include benchmarks
+recursive-include benchmarks *.py
+
+# Include tests (for source distribution)
+recursive-include tests *.py
+include pytest.ini
+include mypy.ini
+
+# Include development configuration
+include .gitignore
+include .pre-commit-config.yaml
+include Makefile
+include Dockerfile
+
+# Exclude unnecessary files
+exclude .env
+exclude .coverage*
+exclude bandit-report.json
+exclude safety-report.json
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.orig
+recursive-exclude * *.rej
+recursive-exclude * *.bak
+recursive-exclude * *.swp
+recursive-exclude * *~
+recursive-exclude .git *
+recursive-exclude .github *
+recursive-exclude .pytest_cache *
+recursive-exclude .mypy_cache *
+recursive-exclude .ruff_cache *
+recursive-exclude htmlcov *
+recursive-exclude dist *
+recursive-exclude build *
+recursive-exclude *.egg-info *

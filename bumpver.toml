@@ -1,0 +1,16 @@
+[bumpver]
+current_version = "1.0.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump: version {old_version} → {new_version}"
+tag_message = "v{new_version}"
+commit = true
+tag = true
+push = false
+
+[bumpver.file_patterns]
+"pyproject.toml" = ['version = "{version}"']
+"src/git_batch_pull/__init__.py" = ['__version__ = "{version}"']
+"CHANGELOG.md" = [
+    '## Unreleased',
+    '## v{new_version} - {utc_now:%Y-%m-%d}'
+]

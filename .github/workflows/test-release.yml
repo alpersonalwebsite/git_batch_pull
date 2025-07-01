@@ -1,0 +1,72 @@
+name: Test Release
+
+on:
+  workflow_dispatch:  # Manual trigger
+    inputs:
+      test_pypi:
+        description: 'Publish to TestPyPI'
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  build-and-test-publish:
+    runs-on: ubuntu-latest
+    environment: test-release
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Run full test suite
+        run: |
+          poetry run pytest --cov=src --cov-report=xml --cov-report=term-missing -v
+          poetry run bandit -r src/
+          poetry run safety check
+
+      - name: Build package
+        run: poetry build
+
+      - name: Verify build
+        run: |
+          poetry run twine check dist/*
+          ls -la dist/
+
+      - name: Test installation
+        run: |
+          pip install dist/*.whl
+          git-batch-pull --help
+          pip uninstall -y git-batch-pull
+
+      - name: Publish to TestPyPI
+        if: ${{ inputs.test_pypi }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
+
+      - name: Test TestPyPI installation
+        if: ${{ inputs.test_pypi }}
+        run: |
+          sleep 30  # Wait for package to be available
+          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ git-batch-pull
+          git-batch-pull --help
