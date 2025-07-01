@@ -5,19 +5,20 @@
 # Default target
 help:
 	@echo "Available targets:"
-	@echo "  install     - Install dependencies and project"
-	@echo "  test        - Run tests with coverage"
-	@echo "  lint        - Run linting checks"
-	@echo "  format      - Format code with black and isort"
-	@echo "  security    - Run security checks"
-	@echo "  build       - Build the package"
-	@echo "  clean       - Clean build artifacts"
-	@echo "  docs        - Build documentation"
-	@echo "  pre-commit  - Install pre-commit hooks"
-	@echo "  release     - Prepare for release (test, build, check)"
-	@echo "  benchmark   - Run performance benchmarks"
-	@echo "  changes     - Check what has changed for changelog"
-	@echo "  changelog   - Open changelog workflow documentation"
+	@echo "  install           - Install dependencies and setup pre-commit hooks"
+	@echo "  test              - Run tests with coverage"
+	@echo "  lint              - Run linting checks"
+	@echo "  format            - Format code with black and isort"
+	@echo "  security          - Run security checks"
+	@echo "  build             - Build the package"
+	@echo "  clean             - Clean build artifacts"
+	@echo "  docs              - Build documentation"
+	@echo "  pre-commit        - Install and run pre-commit hooks on all files"
+	@echo "  pre-commit-install - Just install pre-commit hooks (auto-run on commit)"
+	@echo "  release           - Prepare for release (test, build, check)"
+	@echo "  benchmark         - Run performance benchmarks"
+	@echo "  changes           - Check what has changed for changelog"
+	@echo "  changelog         - Open changelog workflow documentation"
 
 # Development setup
 install:
@@ -73,10 +74,17 @@ docs:
 	mkdocs build
 	mkdocs serve
 
-# Pre-commit
+# Pre-commit hooks setup and execution
 pre-commit:
+	@echo "🔧 Installing pre-commit hooks..."
 	poetry run pre-commit install
+	@echo "🏃 Running pre-commit on all files..."
 	poetry run pre-commit run --all-files
+
+pre-commit-install:
+	@echo "🔧 Installing pre-commit hooks..."
+	poetry run pre-commit install
+	@echo "✅ Pre-commit hooks installed! They will run automatically on git commit."
 
 # Release preparation
 release: clean test lint security build-check
