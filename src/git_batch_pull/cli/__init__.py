@@ -1,7 +1,6 @@
 """CLI interface for git-batch-pull."""
 
 import subprocess
-from typing import Optional
 
 import typer
 

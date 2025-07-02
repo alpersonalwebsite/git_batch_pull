@@ -130,7 +130,7 @@ def show_advanced_examples():
         },
         {
             "title": "Protocol switching workflow",
-            "command": "git-batch-pull sync user username --ssh  # Run this after previously using HTTPS",
+            "command": "git-batch-pull sync user username --ssh  # Run after using HTTPS",
             "description": "Automatically detect protocol mismatches and prompt for updates",
         },
     ]

@@ -15,7 +15,7 @@ CLI_PATH = str(Path(__file__).parent.parent / "src/git_batch_pull/cli.py")
 
 
 @pytest.mark.skip(
-    reason="Integration test needs rework after architecture refactoring. Protocol logic is tested in unit tests."
+    reason="Integration test needs rework after refactoring. Protocol tested in unit tests."
 )
 @pytest.mark.parametrize(
     "remote_url,args_use_ssh,should_prompt",

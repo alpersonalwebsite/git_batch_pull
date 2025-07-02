@@ -73,12 +73,12 @@ repos:
         args: [--baseline, .secrets.baseline]
         exclude: ^(tests/|docs/|examples/|benchmarks/)
 
-  # Dependency checking
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.2
-    hooks:
-      - id: python-safety-dependencies-check
-        language_version: python3
+  # Dependency checking (disabled due to Poetry 2.x compatibility)
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+  #   rev: v1.3.2
+  #   hooks:
+  #     - id: python-safety-dependencies-check
+  #       language_version: python3
 
   # Local hooks
   - repo: local

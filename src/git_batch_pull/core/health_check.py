@@ -11,7 +11,7 @@ import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import requests
 
@@ -25,7 +25,7 @@ class HealthCheckResult:
     name: str
     status: str  # "ok", "warning", "error"
     message: str
-    details: Dict[str, any] = field(default_factory=dict)
+    details: Dict[str, Any] = field(default_factory=dict)
 
 
 class HealthChecker:
@@ -83,7 +83,10 @@ class HealthChecker:
             return HealthCheckResult(
                 name="python_version",
                 status="error",
-                message=f"Python {version.major}.{version.minor} is not supported. Minimum required: {min_version[0]}.{min_version[1]}",
+                message=(
+                    f"Python {version.major}.{version.minor} is not supported. "
+                    f"Minimum required: {min_version[0]}.{min_version[1]}"
+                ),
                 details={"version": sys.version, "minimum": f"{min_version[0]}.{min_version[1]}"},
             )
 
@@ -146,6 +149,13 @@ class HealthChecker:
                         "rate_limit": data.get("rate", {}),
                         "core_remaining": data.get("rate", {}).get("remaining", 0),
                     },
+                )
+            else:
+                return HealthCheckResult(
+                    name="github_api_access",
+                    status="warning",
+                    message=f"GitHub API returned status {response.status_code}",
+                    details={"status_code": response.status_code},
                 )
         except Exception as e:
             return HealthCheckResult(

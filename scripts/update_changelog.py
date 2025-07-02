@@ -59,8 +59,6 @@ def analyze_changes(files):
         if not file.strip():
             continue
 
-        file_path = Path(file)
-
         # Documentation changes
         if file.startswith("docs/") or file.endswith(".md"):
             if "security" in file.lower():

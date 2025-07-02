@@ -8,7 +8,9 @@
 !.env.template
 
 # Credentials and tokens
-*token*
+*.token
+*_token
+token.txt
 *secret*
 *password*
 *key*
@@ -16,7 +18,9 @@
 !pyproject.toml
 !*.md
 !**/test_*
-!**/*token_manager.py  # Allow our token manager code
+
+# Exception for our secure token manager code
+!**/*token_manager.py
 
 # Personal configuration
 config.local.*

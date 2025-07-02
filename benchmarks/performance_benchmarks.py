@@ -28,7 +28,7 @@ class BenchmarkRunner:
     def time_operation(self, name: str, operation_func, *args, **kwargs) -> float:
         """Time a single operation and record the result."""
         start_time = time.perf_counter()
-        result = operation_func(*args, **kwargs)
+        _ = operation_func(*args, **kwargs)
         end_time = time.perf_counter()
 
         duration = end_time - start_time
@@ -50,7 +50,7 @@ class BenchmarkRunner:
                     ssh_url=f"git@github.com:user/repo-{i}.git",
                     default_branch="main",
                 )
-                repo = Repository(info=info, local_path=Path(f"/tmp/repo-{i}"))
+                repo = Repository(info=info, local_path=Path(f"/tmp/repo-{i}"))  # nosec
                 repositories.append(repo)
             return repositories
 

@@ -46,7 +46,7 @@ def create_cli_app() -> typer.Typer:
     # Create a simple app that directly uses our main command
     return typer.Typer(
         name="git-batch-pull",
-        help="Clone and pull one, several, or all GitHub repos for a user/org, securely and robustly.",
+        help="Clone and pull GitHub repos for a user/org, securely and robustly.",
         no_args_is_help=True,
         add_completion=True,
         callback=main_command,  # Use main_command as the app callback

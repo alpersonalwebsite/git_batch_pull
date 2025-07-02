@@ -22,7 +22,8 @@ def test_repo_store_corrupt_json(tmp_path):
         store.load()
 
 
-# Note: True concurrent access would require threading/multiprocessing and is not typical for this class.
+# Note: True concurrent access would require threading/multiprocessing
+# and is not typical for this class.
 # Here we just simulate two instances reading/writing the same file.
 def test_repo_store_multiple_instances(tmp_path):
     """

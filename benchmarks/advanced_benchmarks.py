@@ -151,7 +151,7 @@ async def benchmark_github_api_calls(
                 ]
             }
 
-            repos = await asyncio.get_event_loop().run_in_executor(
+            _ = await asyncio.get_event_loop().run_in_executor(
                 None, github_service.get_repositories, "test-org", "all"
             )
 
@@ -172,9 +172,9 @@ def benchmark_git_operations(profiler: PerformanceProfiler, git_service, repo_co
                     mock_run.return_value = Mock(returncode=0, stdout="", stderr="")
                     try:
                         # This would normally clone, but we're mocking it
-                        result = git_service.clone_repository(repo.clone_url, str(repo_path))
+                        _ = git_service.clone_repository(repo.clone_url, str(repo_path))
                     except Exception:
-                        pass  # Expected since we're mocking
+                        pass  # Expected since we're mocking  # nosec
 
         # Test pull operations
         with profiler.profile(f"Git Pull - {repo_count} repos (mocked)"):
@@ -188,9 +188,9 @@ def benchmark_git_operations(profiler: PerformanceProfiler, git_service, repo_co
                         returncode=0, stdout="Already up to date.", stderr=""
                     )
                     try:
-                        result = git_service.pull_repository(str(repo_path))
+                        _ = git_service.pull_repository(str(repo_path))
                     except Exception:
-                        pass  # Expected since we're mocking
+                        pass  # Expected since we're mocking  # nosec
 
 
 def benchmark_batch_processing(
@@ -211,11 +211,9 @@ def benchmark_batch_processing(
                 }
 
                 try:
-                    results = batch_processor.process_repositories(
-                        mock_repos, temp_dir, max_workers=4
-                    )
+                    _ = batch_processor.process_repositories(mock_repos, temp_dir, max_workers=4)
                 except Exception:
-                    pass  # Expected since we're mocking
+                    pass  # Expected since we're mocking  # nosec
 
 
 def benchmark_memory_usage(profiler: PerformanceProfiler):

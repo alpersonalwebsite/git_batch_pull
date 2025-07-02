@@ -144,14 +144,14 @@ class BatchProcessor:
                         future.result()  # This will raise any exception that occurred
                     except Exception:
                         # Exception already handled in processor_func
-                        pass
+                        pass  # nosec
             else:
                 # Wait for all futures to complete
                 for future in concurrent.futures.as_completed(futures):
                     try:
                         future.result()
                     except Exception:
-                        pass
+                        pass  # nosec
 
     def _process_sequential(
         self,
@@ -233,4 +233,7 @@ class ProcessingResult:
         if self.simulated > 0:
             return f"Simulation: {self.simulated} repositories would be processed"
         else:
-            return f"Processed: {self.processed}, Failed: {self.failed}, Success rate: {self.success_rate:.1f}%"
+            return (
+                f"Processed: {self.processed}, Failed: {self.failed}, "
+                f"Success rate: {self.success_rate:.1f}%"
+            )

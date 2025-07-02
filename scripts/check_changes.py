@@ -178,7 +178,7 @@ def main():
     # Check if we're in a git repository
     try:
         run_git_command(["git", "rev-parse", "--git-dir"])
-    except:
+    except Exception:
         print("❌ Not in a git repository!")
         sys.exit(1)
 

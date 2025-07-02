@@ -111,7 +111,7 @@ class TestCloneVsPullBehavior:
     def test_sync_clones_with_ssh_when_repository_not_exists(
         self, batch_processor, sample_repository, mock_subprocess_runner
     ):
-        """Test that sync clones with SSH when repository doesn't exist locally and SSH is requested."""
+        """Test that sync clones with SSH when repo doesn't exist and SSH requested."""
         # Repository doesn't exist locally
         assert not sample_repository.exists_locally
 

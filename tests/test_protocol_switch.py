@@ -27,7 +27,7 @@ def test_no_prompt_when_protocol_matches_ssh(tmp_path, monkeypatch):
     """
     Test that no prompt is shown when protocol matches SSH and --use-ssh is set.
     """
-    repo_dir = setup_git_repo(tmp_path, "git@github.com:user/repo.git")
+    _ = setup_git_repo(tmp_path, "git@github.com:user/repo.git")
     # Simulate args.use_ssh = True
     mismatches = []
 
@@ -49,7 +49,7 @@ def test_no_prompt_when_protocol_matches_https(tmp_path, monkeypatch):
     """
     Test that no prompt is shown when protocol matches HTTPS and --use-ssh is not set.
     """
-    repo_dir = setup_git_repo(tmp_path, "https://github.com/user/repo.git")
+    _ = setup_git_repo(tmp_path, "https://github.com/user/repo.git")
     mismatches = []
 
     def fake_prompt(m, t):
@@ -69,7 +69,7 @@ def test_prompt_when_protocol_mismatch_ssh(tmp_path, monkeypatch):
     """
     Test that a prompt is shown when there is a protocol mismatch and --use-ssh is set.
     """
-    repo_dir = setup_git_repo(tmp_path, "https://github.com/user/repo.git")
+    _ = setup_git_repo(tmp_path, "https://github.com/user/repo.git")
     mismatches = []
     is_ssh = False
     is_https = True
@@ -85,7 +85,7 @@ def test_prompt_when_protocol_mismatch_https(tmp_path, monkeypatch):
     """
     Test that a prompt is shown when there is a protocol mismatch and --use-ssh is not set.
     """
-    repo_dir = setup_git_repo(tmp_path, "git@github.com:user/repo.git")
+    _ = setup_git_repo(tmp_path, "git@github.com:user/repo.git")
     mismatches = []
     is_ssh = True
     is_https = False
