@@ -53,7 +53,7 @@ tomli = "*"
 importlib-metadata = "*"
 argcomplete = "*"
 keyring = "*"
-docutils = "^0.20"
+docutils = "^0.21"
 typer = "^0.15.0"
 # Core dependencies for secure git operations
 cryptography = ">=44.0.1"
