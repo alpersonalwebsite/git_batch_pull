@@ -68,7 +68,7 @@ safety = "*"
 build = "*"
 twine = "*"
 mkdocs = "^1.6.1"
-mkdocs-material = "^9.6.14"
+mkdocs-material = "^9.6.15"
 mkdocstrings = {extras = ["python"], version = "^0.29.1"}
 pre-commit = "^4.2.0"
 tomli = "^2.2.1"
