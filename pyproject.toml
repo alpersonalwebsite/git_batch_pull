@@ -54,7 +54,7 @@ importlib-metadata = "*"
 argcomplete = "*"
 keyring = "*"
 docutils = "^0.20"
-typer = "^0.15.0"
+typer = "^0.16.0"
 # Core dependencies for secure git operations
 cryptography = ">=44.0.1"
 
