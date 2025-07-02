@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "git-batch-pull"
-version = "2.0.0"
+version = "2.0.1"
 description = "Clone and pull one, several, or all GitHub repos for a user/org, securely and robustly."
 authors = ["Al Diaz <aldiazcode@gmail.com>"]
 license = "MIT"

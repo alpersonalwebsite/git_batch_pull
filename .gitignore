@@ -19,6 +19,13 @@ token.txt
 !*.md
 !**/test_*
 
+# Improvements
+improvements/
+
+# Release files
+FINAL_RELEASE_SUMMARY.md
+
+
 # Exception for our secure token manager code
 !**/*token_manager.py
 
@@ -60,8 +67,11 @@ build/
 .mypy_cache/
 .coverage
 .coverage.*
+coverage.xml
 htmlcov/
 .tox/
+/tmp/test_auth_complete.py
+/tmp/test_interactive_auth.py
 
 # ==========================================
 # SECURITY & ANALYSIS

@@ -1,9 +1,5 @@
 """Tests for utility functions."""
 
-import pytest
-from unittest.mock import patch, mock_open
-from pathlib import Path
-
 from git_batch_pull.utils import format_size, sanitize_filename
 
 

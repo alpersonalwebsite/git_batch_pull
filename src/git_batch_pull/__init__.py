@@ -18,7 +18,7 @@ from .exceptions import (
 )
 from .models import Config, Repository, RepositoryBatch, RepositoryInfo
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 __author__ = "Al Diaz"
 __email__ = "aldiazcode@gmail.com"
 __license__ = "MIT"

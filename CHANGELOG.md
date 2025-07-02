@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## [2.0.1] - 2025-07-02
+
+### 🐛 Bug Fixes
+
+#### Critical Packaging Fix
+- **🔧 Fixed missing `token_manager.py` in package**: The security module's `token_manager.py` was inadvertently excluded from the built wheel due to an overly broad `.gitignore` pattern (`**/token*`)
+- **📦 Package integrity restored**: Updated `.gitignore` to use more specific pattern (`**/token_*`) that only excludes temporary token files
+- **🛡️ Security functionality preserved**: Interactive authentication and token management features now work correctly in distributed package
+- **✅ Validation completed**: Rebuilt package and confirmed all security components are properly included
+
+#### Test & Code Quality Improvements
+- **🧪 Enhanced test utilities**: Improved formatting and robustness of test helper functions
+- **✅ Full test suite validation**: All 101 tests pass successfully after packaging fix
+- **🔍 Health check verified**: CLI health check confirms all components including security module are operational
+
+### Technical Details
+- **Root Cause**: Overly broad `.gitignore` pattern excluded legitimate source files
+- **Solution**: More precise ignore patterns to prevent similar issues
+- **Impact**: Ensures complete v2.0.0 feature set is fully functional for all users
+
+### Upgrade Notes
+- **No configuration changes required**: Existing v2.0.0 setups remain valid
+- **Simple upgrade path**: Standard package update restores full functionality
+- **Recommended for all v2.0.0 users**: Critical fix for security features
+
 ## [2.0.0] - 2025-07-01
 
 ### 🚀 **COMPLETE ARCHITECTURE REWRITE**

@@ -10,6 +10,9 @@ from .health import health_command
 
 def get_version() -> str:
     """Get the current version with git commit hash."""
+    # Import here to avoid circular imports
+    from git_batch_pull import __version__
+
     try:
         git_hash = (
             subprocess.check_output(
@@ -18,9 +21,9 @@ def get_version() -> str:
             .decode()
             .strip()
         )
-        return f"2.0.0 (git {git_hash})"
+        return f"{__version__} (git {git_hash})"
     except Exception:
-        return "2.0.0"
+        return __version__
 
 
 def version_callback(value: bool) -> None:
